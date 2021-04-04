@@ -1,4 +1,3 @@
-# First name, last name, email, phone number, address
 from faker import Faker
 import random
 

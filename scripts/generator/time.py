@@ -1,6 +1,4 @@
-# date, minute, hour, day_name, month, year, holiday_status, weekend_status, weekday_status
 import datetime
-import random
 
 
 def generate_fake_times():
