@@ -10,12 +10,11 @@ def generate_fake_times():
         month = date_iterator.month
         year = date_iterator.year
 
-        for hour in range(0, 23):
+        for hour in range(0, 24):
             date = {
                 'date': str(date_iterator),
                 'day_name': day_name,
                 'hour': hour,
-                'minute': 0,
                 'month': month,
                 'year': year,
             }
