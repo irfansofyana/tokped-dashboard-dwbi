@@ -4,11 +4,6 @@ import random
 
 
 def generate_fake_times():
-    def is_weekend(name_of_day):
-        weekend_days = ['saturday', 'sunday']
-
-        return name_of_day.lower() in weekend_days
-
     dates = []
 
     date_iterator = datetime.date(2017, 1, 1)
@@ -17,12 +12,12 @@ def generate_fake_times():
         month = date_iterator.month
         year = date_iterator.year
 
-        for hour in range(11, 22):
+        for hour in range(0, 23):
             date = {
                 'date': str(date_iterator),
+                'day_name': day_name,
                 'hour': hour,
                 'minute': 0,
-                'day_name': day_name,
                 'month': month,
                 'year': year,
             }
