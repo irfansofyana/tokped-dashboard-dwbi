@@ -70,3 +70,22 @@ class Product(Base):
         self.product_price = product["product_price"]
         self.product_category = product["product_category"]
         self.product_weight = product["product_weight"]
+
+class ClickRate(Base):
+    __tablename__ = "ClickRate"
+
+    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+    product_id = Column(Integer, ForeignKey('Product.id'))
+    start_time_id = Column(Integer, ForeignKey('Time.id'))
+    end_time_id = Column(Integer, ForeignKey('Time.id'))
+    number_of_clicks = Column(Integer, nullable=False)
+    duration_in_minute = Column(Integer, nullable=False)
+    click_rate = Column(Integer, nullable=False)
+
+    def __init__(self, click_rate):
+        self.product_id = click_rate["product_id"]
+        self.start_time_id = click_rate["start_time_id"]
+        self.end_time_id = click_rate["end_time_id"]
+        self.number_of_clicks = click_rate["number_of_clicks"]
+        self.duration_in_minute = click_rate["duration_in_minute"]
+        self.click_rate = click_rate["click_rate"]

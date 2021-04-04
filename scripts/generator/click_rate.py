@@ -5,10 +5,10 @@ import random
 def find_duration_in_minute(d1, d2):
     d1 = datetime.strptime(d1, "%Y-%m-%d %H")
     d2 = datetime.strptime(d2, "%Y-%m-%d %H")
-    return (d2 - d1).total_seconds() // 60
+    return int((d2 - d1).total_seconds() // 60)
 
 
-def generate_click_rates(products, times):
+def generate_fake_click_rates(products, times):
     click_rates = []
     NUMBER_OF_GENERATED_CLICK_RATES = 5000
 
@@ -27,6 +27,7 @@ def generate_click_rates(products, times):
             'product_id': product_id,
             'start_time_id': start_tid,
             'end_time_id': end_tid,
+            'number_of_clicks': number_of_clicks,
             'duration_in_minute': duration_in_minute,
             'click_rate': click_rate
         }

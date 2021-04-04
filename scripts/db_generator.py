@@ -3,6 +3,7 @@ from scripts.generator.customer import *
 from scripts.generator.time import *
 from scripts.generator.promo import *
 from scripts.generator.product import *
+from scripts.generator.click_rate import *
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from scripts.schema.tables import Base
@@ -46,16 +47,20 @@ if __name__ == "__main__":
             generate_fake_promos: Promo,
             generate_fake_customers: Customer,
             generate_fake_times: Time,
-            generate_fake_products: Product
+            generate_fake_products: Product,
         }
-        process = ["promo", "customer", "times", "products"]
+        process = ["Promo", "Customer", "Time", "Product"]
+        fake_data = [None] * 4
 
         for i, generator in enumerate(generator_and_table):
             table = generator_and_table[generator]
-            fake_data = generator()
-            load_table(session, table, fake_data)
+            fake_data[i] = generator()
+            load_table(session, table, fake_data[i])
 
             print(f"Generate {process[i]} table success!")
 
+        fake_click_rates = generate_fake_click_rates(fake_data[3], fake_data[2])
+        load_table(session, ClickRate, fake_click_rates)
+        print(f"Generate ClickRate table success!")
     except Exception as err:
         print(err)
