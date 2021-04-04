@@ -2,6 +2,7 @@ from scripts.schema.tables import *
 from scripts.generator.customer import *
 from scripts.generator.time import *
 from scripts.generator.promo import *
+from scripts.generator.product import *
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from scripts.schema.tables import Base
@@ -44,13 +45,17 @@ if __name__ == "__main__":
         generator_and_table = {
             generate_fake_promos: Promo,
             generate_fake_customers: Customer,
-            generate_fake_times: Time
+            generate_fake_times: Time,
+            generate_fake_products: Product
         }
+        process = ["promo", "customer", "times", "products"]
 
-        for generator in generator_and_table:
+        for i, generator in enumerate(generator_and_table):
             table = generator_and_table[generator]
             fake_data = generator()
             load_table(session, table, fake_data)
+
+            print(f"Generate {process[i]} table success!")
 
     except Exception as err:
         print(err)

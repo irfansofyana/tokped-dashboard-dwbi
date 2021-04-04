@@ -54,3 +54,19 @@ class Time(Base):
         self.hour = time["hour"]
         self.month = time["month"]
         self.year = time["year"]
+
+
+class Product(Base):
+    __tablename__ = "Product"
+
+    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+    product_name = Column(String(100), nullable=False)
+    product_category = Column(String(100), nullable=False)
+    product_price = Column(Integer, nullable=False)
+    product_weight = Column(Integer)
+
+    def __init__(self, product):
+        self.product_name = product["product_name"]
+        self.product_price = product["product_price"]
+        self.product_category = product["product_category"]
+        self.product_weight = product["product_weight"]
