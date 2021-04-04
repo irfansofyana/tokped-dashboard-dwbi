@@ -30,13 +30,13 @@ def generate_fake_customers():
             phone_number = fake.phone_number()
 
             customer = {
-                'age': age,
-                'location': location,
-                'gender': gender,
-                'address': address,
-                'drop_point': drop_point,
-                'phone_number': phone_number,
-                'email': name + fake.domain_name()
+                'customer_age': age,
+                'customer_location': location,
+                'customer_gender': gender,
+                'customer_address': address,
+                'customer_dropPoint': drop_point,
+                'customer_phoneNumber': phone_number,
+                'customer_email': name + fake.domain_name()
             }
 
             customers.append(customer)
