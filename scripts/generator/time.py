@@ -4,7 +4,7 @@ import datetime
 def generate_fake_times():
     dates = []
 
-    date_iterator = datetime.date(2017, 1, 1)
+    date_iterator = datetime.date(2019, 1, 1)
     while date_iterator != datetime.date.today():
         day_name = date_iterator.strftime("%A")
         month = date_iterator.month
