@@ -5,6 +5,7 @@ import random
 def generate_age(youngest, oldest):
     return random.randint(youngest, oldest)
 
+
 def generate_fake_customers():
     customers = []
     NUMBER_OF_GENERATED_CUSTOMERS = 1000
