@@ -17,8 +17,8 @@ def generate_fake_click_rates(products, times):
         start_tid = random.randint(1, len(times) - 24)
         end_tid = start_tid + random.randint(1, 24)
         duration_in_minute = find_duration_in_minute(
-            times[start_tid]["date"] + " " + str(times[start_tid]["hour"]),
-            times[end_tid]["date"] + " " + str(times[end_tid]["hour"])
+            times[start_tid-1]["date"] + " " + str(times[start_tid-1]["hour"]),
+            times[end_tid-1]["date"] + " " + str(times[end_tid-1]["hour"])
         )
         number_of_clicks = random.randint(1, 10000)
         click_rate = number_of_clicks // duration_in_minute
