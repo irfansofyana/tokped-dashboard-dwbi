@@ -17,6 +17,8 @@ def generate_fake_transactions(customers, products, promos, times, services):
         product_price = products[product_id-1]["product_price"]
         promo_discount = promos[promo_id-1]["promo_discount"] * product_price // 100
         total_price = product_price - promo_discount
+        if transaction_status == 'Fail':
+            total_price = None
 
         transaction = {
             'customer_id': customer_id,

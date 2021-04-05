@@ -5,6 +5,7 @@ from scripts.generator.promo import *
 from scripts.generator.product import *
 from scripts.generator.click_rate import *
 from scripts.generator.service import *
+from scripts.generator.transaction import *
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from scripts.schema.tables import Base
@@ -63,6 +64,12 @@ if __name__ == "__main__":
 
         fake_click_rates = generate_fake_click_rates(fake_data[3], fake_data[2])
         load_table(session, ClickRate, fake_click_rates)
-        print(f"Generate ClickRate table success!")
+        print("Generate ClickRate table success!")
+
+        fake_transactions = generate_fake_transactions(
+            fake_data[1], fake_data[3], fake_data[0], fake_data[2], fake_data[4]
+        )
+        load_table(session, Transaction, fake_transactions)
+        print("Generate Transaction table success!")
     except Exception as err:
         print(err)

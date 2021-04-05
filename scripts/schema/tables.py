@@ -101,3 +101,25 @@ class Service(Base):
     def __init__(self, service):
         self.service_name = service["name"]
         self.service_birth = service["date"]
+
+
+class Transaction(Base):
+    __tablename__ = "Transaction"
+
+    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+    customer_id = Column(Integer, ForeignKey('Customer.id'))
+    service_id = Column(Integer, ForeignKey('Service.id'))
+    time_id = Column(Integer, ForeignKey('Time.id'))
+    product_id = Column(Integer, ForeignKey('Product.id'))
+    promo_id = Column(Integer, ForeignKey('Promo.id'))
+    transaction_status = Column(String(20), nullable=False)
+    total_price = Column(Integer)
+
+    def __init__(self, transaction):
+        self.customer_id = transaction["customer_id"]
+        self.service_id = transaction["service_id"]
+        self.time_id = transaction["time_id"]
+        self.product_id = transaction["product_id"]
+        self.promo_id = transaction["promo_id"]
+        self.transaction_status = transaction["transaction_status"]
+        self.total_price = transaction["total_price"]
