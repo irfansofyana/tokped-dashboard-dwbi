@@ -3,6 +3,7 @@ from scripts.generator.promo import generate_fake_promos
 from scripts.generator.time import generate_fake_times
 from scripts.generator.product import generate_fake_products
 from scripts.generator.click_rate import generate_fake_click_rates
+from scripts.generator.service import generate_fake_services
 
 if __name__ == "__main__":
     customers = generate_fake_customers()
@@ -24,3 +25,7 @@ if __name__ == "__main__":
     cr = generate_fake_click_rates(products, times)
     for c in cr:
         print(c)
+
+    services = generate_fake_services()
+    for s in services:
+        print(s)

@@ -4,6 +4,7 @@ from scripts.generator.time import *
 from scripts.generator.promo import *
 from scripts.generator.product import *
 from scripts.generator.click_rate import *
+from scripts.generator.service import *
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from scripts.schema.tables import Base
@@ -48,9 +49,10 @@ if __name__ == "__main__":
             generate_fake_customers: Customer,
             generate_fake_times: Time,
             generate_fake_products: Product,
+            generate_fake_services: Service
         }
-        process = ["Promo", "Customer", "Time", "Product"]
-        fake_data = [None] * 4
+        process = ["Promo", "Customer", "Time", "Product", "Service"]
+        fake_data = [None] * 5
 
         for i, generator in enumerate(generator_and_table):
             table = generator_and_table[generator]

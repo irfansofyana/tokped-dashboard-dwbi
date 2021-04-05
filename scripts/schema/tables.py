@@ -89,3 +89,15 @@ class ClickRate(Base):
         self.number_of_clicks = click_rate["number_of_clicks"]
         self.duration_in_minute = click_rate["duration_in_minute"]
         self.click_rate = click_rate["click_rate"]
+
+
+class Service(Base):
+    __tablename__ = "Service"
+
+    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+    service_name = Column(String(100), nullable=False)
+    service_birth = Column(Date, nullable=False)
+
+    def __init__(self, service):
+        self.service_name = service["name"]
+        self.service_birth = service["date"]
