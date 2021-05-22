@@ -116,6 +116,7 @@ class Transaction(Base):
     time_id = Column(Integer, ForeignKey('Time.id'))
     product_id = Column(Integer, ForeignKey('Product.id'))
     promo_id = Column(Integer, ForeignKey('Promo.id'))
+    seller_id = Column(Integer, ForeignKey('Seller.id'))
     transaction_status = Column(String(20), nullable=False)
     total_price = Column(Integer)
 

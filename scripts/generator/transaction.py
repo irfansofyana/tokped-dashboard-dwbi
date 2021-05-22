@@ -1,7 +1,7 @@
 import random
 
 
-def generate_fake_transactions(customers, products, promos, times, services):
+def generate_fake_transactions(customers, products, promos, times, services, sellers):
     transactions = []
     NUMBER_OF_GENERATED_TRANSACTIONS = 100000
     cnt_success = 95 * NUMBER_OF_GENERATED_TRANSACTIONS // 100
@@ -12,6 +12,7 @@ def generate_fake_transactions(customers, products, promos, times, services):
         time_id = random.randint(1, len(times))
         service_id = random.randint(1, len(services))
         promo_id = random.randint(1, len(promos))
+        seller_id = random.randint(1, len(sellers))
         transaction_status = 'Success' if i < cnt_success else 'Fail'
 
         product_price = products[product_id-1]["product_price"]
@@ -22,6 +23,7 @@ def generate_fake_transactions(customers, products, promos, times, services):
 
         transaction = {
             'customer_id': customer_id,
+            'seller_id': seller_id,
             'service_id': service_id,
             'time_id': time_id,
             'product_id': product_id,
