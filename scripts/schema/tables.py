@@ -14,6 +14,7 @@ class Customer(Base):
     customer_location = Column(String(100), nullable=False)
     customer_gender = Column(String(10), nullable=False)
     customer_dropPoint = Column(String(100), nullable=False)
+    customer_address = Column(String(100), nullable=False)
     customer_phoneNumber = Column(String(20), nullable=False)
     customer_email = Column(String(50), nullable=False)
 
@@ -22,6 +23,7 @@ class Customer(Base):
         self.customer_age = customer["customer_age"]
         self.customer_location = customer["customer_location"]
         self.customer_gender = customer["customer_gender"]
+        self.customer_address = customer["customer_address"]
         self.customer_dropPoint = customer["customer_dropPoint"]
         self.customer_phoneNumber = customer["customer_phoneNumber"]
         self.customer_email = customer["customer_email"]
@@ -74,6 +76,7 @@ class Product(Base):
         self.product_price = product["product_price"]
         self.product_category = product["product_category"]
         self.product_weight = product["product_weight"]
+        self.product_category_specific = product["product_category_specific"]
 
 
 class ClickRate(Base):
