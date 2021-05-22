@@ -31,6 +31,7 @@ def generate_fake_customers():
             phone_number = fake.phone_number()
 
             customer = {
+                'customer_name': name,
                 'customer_age': age,
                 'customer_location': location,
                 'customer_gender': gender,

@@ -9,6 +9,7 @@ class Customer(Base):
     __tablename__="Customer"
 
     id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+    customer_name = Column(String(100), nullable=False)
     customer_age = Column(Integer, nullable=False)
     customer_location = Column(String(100), nullable=False)
     customer_gender = Column(String(10), nullable=False)
@@ -17,6 +18,7 @@ class Customer(Base):
     customer_email = Column(String(50), nullable=False)
 
     def __init__(self, customer):
+        self.customer_name = customer["customer_name"]
         self.customer_age = customer["customer_age"]
         self.customer_location = customer["customer_location"]
         self.customer_gender = customer["customer_gender"]
