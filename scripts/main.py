@@ -71,14 +71,15 @@ def generate_and_load_dimension_tables(session):
         print("ERROR Generate and Load Dimension tables: ", err)
 
 
-def generate_and_load_transaction_table(session, customer, product, promo, time, service):
+def generate_and_load_transaction_table(session, customer, product, promo, time, service, seller):
     try:
         fake_transactions = generate_fake_transactions(
             customer,
             product,
             promo,
             time,
-            service
+            service,
+            seller
         )
         load_table(session, Transaction, fake_transactions)
         print("Generate and Load Transaction table success!")
@@ -124,7 +125,8 @@ def generate_and_load_fact_tables(session, dimension_tables):
             dimension_tables["Product"],
             dimension_tables["Promo"],
             dimension_tables["Time"],
-            dimension_tables["Service"]
+            dimension_tables["Service"],
+            dimension_tables["Seller"]
         )
         generate_and_load_complaint_table(
             session,
