@@ -65,6 +65,7 @@ class Product(Base):
     id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
     product_name = Column(String(100), nullable=False)
     product_category = Column(String(100), nullable=False)
+    product_category_specific = Column(String(100), nullable=False)
     product_price = Column(Integer, nullable=False)
     product_weight = Column(Integer)
 

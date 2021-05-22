@@ -146,6 +146,180 @@ def generate_product_topup(fake):
     return products
 
 
+def fill_product_category_specific(products):
+    pc_specific_candidates = {
+        "Buku": ["Buku Sidu", "Buku Kiki", "Buku Harvest"],
+        "Dapur": ["Kompor Astra", "Panci Happy Call", "Magic jar Panasonic"],
+        "Elektronik": [
+            "Earphone Joyseus",
+            "Sony SRS - ultra sound",
+            "Kipas Angin Dinding Cosmos",
+        ],
+        "Fashion Anak & Bayi": [
+            "Jam Tangan Karakter",
+            "Kostum Putri Duyung Anak",
+            "Sepatu Bayi Elmo"
+        ],
+        "Fashion Muslim": [
+            "Sarung Gajah Duduk",
+            "Sarung Wadimor",
+            "Kerudung Rabbani"
+        ],
+        "Fashion Pria": [
+            "Erigo Jogger Pants",
+            "Brodo Sneakers",
+            "Kalibre Waist Bag"
+        ],
+        "Fashion Wanita": [
+            "Cotton On Mini Dress",
+            "Yoenik Apparel Ulvaru Hoodie",
+            "Marks & Spencer Blouse"
+        ],
+        "Film & Musik": [
+            "Gitar Yamaha",
+            "Biola Yamaha",
+            "DVD Spiderman 3",
+            "Keyboard Yamaha",
+        ],
+        "Gaming": [
+            "Mouse Asus Gaming",
+            "Keyboard Mekanik",
+            "Keyboard RGB",
+        ],
+        "Handphone & Tablet": [
+            "Handphone Xiaomi",
+            "Handphone Samsung",
+            "Ipad",
+            "Iphone",
+        ],
+        "Ibu & Bayi": [
+            "Sweety Popok Silver Pants XXL 3x24s",
+            "Nepia Genki Pants L 30",
+            "Caplang Minyak Kayu Putih 210ml",
+            "Sun Bubur Bayi 120G",
+            "Selimut Bayi 76x102",
+        ],
+        "Kamera": [
+            "Sony DSLR",
+            "Canon Mirrorless",
+            "Nikon DSLR",
+            "Xiaomi Action Cam",
+            "GoPro"
+        ],
+        "Kecantikan": [
+            "Garnier Super UV Light Complete Sunscreen",
+            "Erha Truwhite Brightening Facial Wash",
+            "Cetaphil Gentle Skin Cleanser",
+            "Garnier Micellar Water Pink"
+        ],
+        "Kesehatan": [
+            "Masker Medis 3ply",
+            "Madu Zestmag",
+            "Forumen Ear Drops",
+            "Obat pelangsing badan",
+            "Sangobion",
+        ],
+        "Komputer & Laptop": [
+            "Asus ROG Zephyrus M15",
+            "HP Pavilion Gaming",
+            "Acer Nitro 5",
+            "Asus Swift 3",
+            "Asus Vivobook 14"
+        ],
+        "Logam Mulia": [
+            "Logam Mulia Antam 10gram",
+            "USB Logam Mulia 0,1gram",
+            "Lotus Archi 1 gram CertiEye",
+            "Logam Mulia Antam 15 gram"
+        ],
+        "Mainan & Hobi": [
+            "Model Gundam",
+            "Kartu YugiOh",
+            "Set Kartu Remi",
+            "Play Doh Mini",
+            "Hotwheals",
+        ],
+        "Makanan & Minuman": [
+            "Indomie",
+            "Coca Cola",
+            "Aqua",
+            "Supermie",
+            "Natadecoco"
+        ],
+        "Office & Stationery": [
+            "Pulpen Snowman",
+            "Pensil Faber Castell",
+            "Pulpen Standard",
+            "Pulpen Standard",
+            "Pulpen Pilot"
+        ],
+        "Olahraga": [
+            "Bola bisbol",
+            "Tongkat bisbol",
+            "Bola golf",
+            "Bola basket",
+        ],
+        "Otomotif": [
+            "Durable Karpet Karet PVC",
+            "Cover Mobil Durable",
+            "Anti Fog Helm Film",
+            "Busi iridium",
+            "Bohlam Headlamp"
+        ],
+        "Perawatan Hewan": [
+            "Whiskas Dry 1, 2 kg",
+            "Slow Feeder",
+            "Mainan Tali Gigitan Anjing",
+            "Me - O seafood 1 Kg"
+        ],
+        "Perawatan Tubuh": [
+            "Pepsodent Sikat Gigi",
+            "Dettol Cairan Antiseptik"
+        ],
+        "Perlengkapan Pesta & Craft": [
+            "Lilin putih",
+            "Lilin angka",
+            "Topi ulang tahun",
+        ],
+        "Pertukangan": [
+            "Kloset Toto",
+            "Kuas Cat Kayu",
+            "Kran Air Stainless"
+        ],
+        "Properti": [
+            "Meja lipat",
+            "Meja standa",
+            "Kursi polygon"
+        ],
+        "Rumah Tangga": [
+            "Meja Belajar Anak",
+            "Lemari Pakaian 2 Pintu",
+            "Meja TV Kayu"
+        ],
+        "Tour & Travel": [
+            "Pop! Hotel Voucher",
+            "Paket Tour Bromo",
+            "Voucher Langganan Cititrans",
+        ],
+        "Wedding": [
+            "Paket Prewedding Indoor",
+            "Cincin Couple Emas",
+            "Kotak Hantaran Seserahan"
+        ],
+    }
+
+    for product in products:
+        category = product['product_category']
+        if category in pc_specific_candidates:
+            pc_specific_candidate = pc_specific_candidates[category]
+            chosen = random.randint(0, len(pc_specific_candidate) - 1)
+            product['product_category_specific'] = pc_specific_candidate[chosen]
+        else:
+            product['product_category_specific'] = category
+
+    return products
+
+
 def generate_fake_products():
     products = []
     faker = Faker('id_ID')
@@ -156,5 +330,7 @@ def generate_fake_products():
     products += generate_product_pajak(fake)
     products += generate_product_topup(fake)
     products += generate_product_pendidikan(fake)
+
+    products = fill_product_category_specific(products)
 
     return products
