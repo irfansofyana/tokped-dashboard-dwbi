@@ -102,8 +102,22 @@ def generate_and_load_complaint_table(session, product, transaction, customer, s
         print("ERROR Generate and Load Complaint table: ", err)
 
 
+def generate_and_load_click_rates_table(session, product, time):
+    try:
+        fake_click_rates = generate_fake_click_rates(product, time)
+        load_table(session, ClickRate, fake_click_rates)
+        print("Generate ClickRate table success!")
+    except Exception as err:
+        print("ERROR Generate and Load Click Rate table", err)
+
+
 def generate_and_load_fact_tables(session, dimension_tables):
     try:
+        generate_and_load_click_rates_table(
+            session,
+            dimension_tables["Product"],
+            dimension_tables["Time"]
+        )
         dimension_tables["Transaction"] = generate_and_load_transaction_table(
             session,
             dimension_tables["Customer"],
