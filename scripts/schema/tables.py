@@ -126,6 +126,7 @@ class Transaction(Base):
         self.time_id = transaction["time_id"]
         self.product_id = transaction["product_id"]
         self.promo_id = transaction["promo_id"]
+        self.seller_id = transaction["seller_id"]
         self.transaction_status = transaction["transaction_status"]
         self.total_price = transaction["total_price"]
 
