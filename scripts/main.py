@@ -7,6 +7,7 @@ from scripts.generator.click_rate import *
 from scripts.generator.service import *
 from scripts.generator.transaction import *
 from scripts.generator.seller import *
+from scripts.generator.complaint import *
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from scripts.schema.tables import Base
@@ -49,7 +50,7 @@ def generate_and_load_dimension_tables(session):
             generate_fake_services: Service,
             generate_fake_sellers: Seller,
         }
-        tables_name = ["Promo", "Customer", "Time", "Product", "Service", "Sellers"]
+        tables_name = ["Promo", "Customer", "Time", "Product", "Service", "Seller"]
         generated_fake_data = {}
 
         for i, generator in enumerate(generator_and_table):
@@ -81,19 +82,43 @@ def generate_and_load_transaction_table(session, customer, product, promo, time,
         )
         load_table(session, Transaction, fake_transactions)
         print("Generate and Load Transaction table success!")
+        return fake_transactions
     except Exception as err:
         print("ERROR Generate and Load Transaction table: ", err)
 
 
+def generate_and_load_complaint_table(session, product, transaction, customer, seller, time):
+    try:
+        fake_complaints = generate_fake_complaints(
+            product,
+            transaction,
+            customer,
+            seller,
+            time
+        )
+        load_table(session, Complaint, fake_complaints)
+        print("Generate and Load Complaint table success!")
+    except Exception as err:
+        print("ERROR Generate and Load Complaint table: ", err)
+
+
 def generate_and_load_fact_tables(session, dimension_tables):
     try:
-        generate_and_load_transaction_table(
+        dimension_tables["Transaction"] = generate_and_load_transaction_table(
             session,
             dimension_tables["Customer"],
             dimension_tables["Product"],
             dimension_tables["Promo"],
             dimension_tables["Time"],
             dimension_tables["Service"]
+        )
+        generate_and_load_complaint_table(
+            session,
+            dimension_tables["Product"],
+            dimension_tables["Transaction"],
+            dimension_tables["Customer"],
+            dimension_tables["Seller"],
+            dimension_tables["Time"]
         )
     except Exception as err:
         print("ERROR Generate and Loading fact tables: ", err)
