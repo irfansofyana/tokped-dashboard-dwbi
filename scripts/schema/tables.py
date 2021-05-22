@@ -4,6 +4,7 @@ from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 
+
 class Customer(Base):
     __tablename__="Customer"
 
@@ -71,6 +72,7 @@ class Product(Base):
         self.product_category = product["product_category"]
         self.product_weight = product["product_weight"]
 
+
 class ClickRate(Base):
     __tablename__ = "ClickRate"
 
@@ -123,3 +125,51 @@ class Transaction(Base):
         self.promo_id = transaction["promo_id"]
         self.transaction_status = transaction["transaction_status"]
         self.total_price = transaction["total_price"]
+
+
+class Seller(Base):
+    __tablename__ = "Seller"
+
+    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+    seller_name = Column(String(100), nullable=False)
+    seller_location = Column(String(20), nullable=False)
+    seller_address = Column(String(100), nullable=False)
+    seller_contact_person = Column(String(20), nullable=False)
+    seller_email = Column(String(50), nullable=False)
+
+    def __init__(self, seller):
+        self.seller_name = seller["seller_name"]
+        self.seller_location = seller["seller_location"]
+        self.seller_address = seller["seller_address"]
+        self.seller_contact_person = seller["seller_contact_person"]
+        self.seller_email = seller["seller_email"]
+
+
+class Complaint(Base):
+    __tablename__ = "Complaint"
+
+    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+    customer_id = Column(Integer, ForeignKey('Customer.id'))
+    transaction_id = Column(Integer, ForeignKey('Transaction.id'))
+    time_of_customer_complaint = Column(Integer, ForeignKey('Time.id'))
+    product_id = Column(Integer, ForeignKey('Product.id'))
+    seller_id = Column(Integer, ForeignKey('Seller.id'))
+    time_of_reconcile = Column(Integer, ForeignKey('Time.id'))
+    complaint_duration = Column(Integer)
+    is_order_delayed = Column(Boolean)
+    is_order_incomplete = Column(Boolean)
+    is_order_broken = Column(Boolean)
+    is_order_not_match = Column(Boolean)
+
+    def __init__(self, complaint):
+        self.customer_id = complaint["customer_id"]
+        self.transaction_id = complaint["transaction_id"]
+        self.time_of_customer_complaint = complaint["time_of_customer_complaint"]
+        self.product_id = complaint["product_id"]
+        self.seller_id = complaint["seller_id"]
+        self.time_of_reconcile = complaint["time_of_reconcile"]
+        self.complaint_duration = complaint["complaint_duration"]
+        self.is_order_delayed = complaint["is_order_delayed"]
+        self.is_order_incomplete = complaint["is_order_incomplete"]
+        self.is_order_broken = complaint["is_order_broken"]
+        self.is_order_not_match = complaint["is_order_not_match"]
